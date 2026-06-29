@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { font-family: 'Archivo', sans-serif; }
+
+body { background: #E9E6DB; color: #16241E; }
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #E9E6DB; }
+::-webkit-scrollbar-thumb { background: #C9C3B2; }
+
+button { cursor: pointer; border: none; background: none; font-family: inherit; }
+a { text-decoration: none; color: inherit; }
+input { font-family: inherit; }
