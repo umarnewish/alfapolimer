@@ -21,7 +21,7 @@ export default function Nav({ t, lang, setLang, page, onNav, dark = false, child
       flexShrink: 0,
     }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginRight: 8 }}>
-        <img src="/assets/alpha-mark.png" alt="α" style={{ height: 32, width: 32, objectFit: 'contain', filter: dark ? 'none' : 'brightness(0) invert(1)' }} />
+        <img src={`${import.meta.env.BASE_URL}assets/alpha-mark.png`} alt="α" style={{ height: 32, width: 32, objectFit: 'contain', filter: dark ? 'none' : 'brightness(0) invert(1)' }} />
         <span style={{ fontFamily: "'Space Mono', monospace", fontWeight: 700, fontSize: 13, color: dark ? '#EDEFEC' : '#fff', letterSpacing: 2 }}>ALPHA</span>
       </div>
 

@@ -45,7 +45,7 @@ export default function CatalogPage({ t, lang, setLang, currency, setCurrency, o
   }, [])
 
   useEffect(() => {
-    fetch('/products.json')
+    fetch(`${import.meta.env.BASE_URL}products.json`)
       .then(r => r.json())
       .then(d => {
         setProducts(d.products)
@@ -261,7 +261,7 @@ export default function CatalogPage({ t, lang, setLang, currency, setCurrency, o
                 }}>#{rank}</div>
               )}
               {p.image
-                ? <img className="card-img" src={`/assets/${p.image}`} alt={p.name} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', transition: 'transform .4s' }} />
+                ? <img className="card-img" src={`${import.meta.env.BASE_URL}assets/${p.image}`} alt={p.name} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', transition: 'transform .4s' }} />
                 : <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "'Archivo', sans-serif", fontSize: 48, fontWeight: 900, color: '#C9C3B2' }}>{p.name[0].toUpperCase()}</div>
               }
             </div>
@@ -321,7 +321,7 @@ export default function CatalogPage({ t, lang, setLang, currency, setCurrency, o
               <td style={{ padding: '8px 12px', color: '#9BA096' }}>№{String(p.id).padStart(3, '0')}</td>
               <td style={{ padding: '4px 8px' }}>
                 {p.image
-                  ? <img src={`/assets/${p.image}`} alt="" style={{ width: 36, height: 36, objectFit: 'cover' }} />
+                  ? <img src={`${import.meta.env.BASE_URL}assets/${p.image}`} alt="" style={{ width: 36, height: 36, objectFit: 'cover' }} />
                   : <div style={{ width: 36, height: 36, background: '#DEDACB', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 16, fontWeight: 900, color: '#C9C3B2', fontFamily: "'Archivo', sans-serif" }}>{p.name[0].toUpperCase()}</div>
                 }
               </td>

@@ -65,7 +65,7 @@ export default function AboutPage({ t, lang, setLang, onNav }) {
                 background: 'rgba(255,255,255,.04)',
                 border: '1px solid rgba(255,255,255,.08)',
               }}>
-                <img src={`/assets/images/${img}`} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(.85)' }} />
+                <img src={`${import.meta.env.BASE_URL}assets/images/${img}`} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(.85)' }} />
               </div>
             ))}
           </div>
