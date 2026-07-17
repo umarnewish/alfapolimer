@@ -1,15 +1,79 @@
-@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap');
+/* ==========================================================================
+   Alpha Polimer Line — Living Catalog Editor
+   Global base + design tokens. Self-hosted fonts (no runtime CDN).
+   Drop real woff2 files into /public/fonts to upgrade fidelity; until then
+   the fallback stacks below approximate Archivo (grotesque) + Space Mono.
+   ========================================================================== */
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* --- Fonts: load local woff2 if present, otherwise fall back gracefully --- */
+@font-face {
+  font-family: 'Archivo';
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+  src: local('Archivo'), url('/fonts/Archivo-Variable.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Space Mono';
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+  src: local('Space Mono'), url('/fonts/SpaceMono.woff2') format('woff2');
+}
 
-html { font-family: 'Archivo', sans-serif; }
+:root {
+  /* Type stacks — 'Archivo'/'Space Mono' win when the woff2 (or a locally
+     installed copy) is available; the rest is a close system fallback. */
+  --ui: 'Archivo', 'Arial Narrow', 'Helvetica Neue', Helvetica, Arial, system-ui, sans-serif;
+  --mono: 'Space Mono', ui-monospace, 'SF Mono', 'SFMono-Regular', Menlo, Consolas, 'Liberation Mono', monospace;
 
-body { background: #E9E6DB; color: #16241E; }
+  /* Palette (design tokens) */
+  --deep: #133D33;
+  --brand: #1F6E5A;
+  --mint: #8FD3BC;
+  --warm: #E9E6DB;
+  --canvas: #E7E3DA;
+  --app: #F4F2EA;
+  --panel: #FBFAF6;
+  --paper: #FCFBF7;
+  --empty: #FAF9F4;
+  --rust: #D2691E;
+  --rust-soft: #E5A579;
+}
 
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: #E9E6DB; }
-::-webkit-scrollbar-thumb { background: #C9C3B2; }
+* { box-sizing: border-box; }
 
-button { cursor: pointer; border: none; background: none; font-family: inherit; }
-a { text-decoration: none; color: inherit; }
-input { font-family: inherit; }
+html, body, #root { height: 100%; }
+
+body {
+  margin: 0;
+  font-family: var(--ui);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  background: var(--canvas);
+  color: var(--deep);
+}
+
+a { color: var(--brand); }
+a:hover { color: var(--deep); }
+
+input, select, button, textarea { font-family: var(--ui); }
+input:focus, textarea:focus, select:focus { outline: 2px solid rgba(31, 110, 90, 0.35); outline-offset: 1px; }
+button { font: inherit; }
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb { background: rgba(19, 61, 51, 0.22); border-radius: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+
+@keyframes toastIn { from { opacity: 0; transform: translate(-50%, 10px); } to { opacity: 1; transform: translate(-50%, 0); } }
+@keyframes popIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes sheetUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Print: emit only the print-preview pages */
+@media print {
+  @page { size: A4; margin: 0; }
+  body { background: #fff; }
+  .no-print { display: none !important; }
+  .print-page { box-shadow: none !important; break-after: page; page-break-after: always; }
+  .print-sheet { background: #fff !important; padding: 0 !important; gap: 0 !important; }
+}

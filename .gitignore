@@ -12,6 +12,22 @@ dist
 dist-ssr
 *.local
 
+# Local secrets & raw data dumps (never commit)
+.env
+*.XLS
+*.xls
+*.JSO
+Shared link.zip
+
+# Backend
+backend/venv
+backend/__pycache__
+backend/**/__pycache__
+backend/.env
+backend/data/*.db
+backend/uploads/*
+!backend/uploads/.gitkeep
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

@@ -1,16 +1,16 @@
-import { useState } from 'react'
-import CatalogPage from './components/CatalogPage.jsx'
-import AboutPage from './components/AboutPage.jsx'
-import { I18N } from './i18n.js'
+import { useAuth } from './lib/AuthProvider.jsx'
+import SignIn from './auth/SignIn.jsx'
+import Editor from './editor/Editor.jsx'
 
 export default function App() {
-  const [page, setPage] = useState('catalog')
-  const [lang, setLang] = useState('ru')
-  const [currency, setCurrency] = useState('uzs')
+  const { isAuthenticated, loading } = useAuth()
 
-  const t = I18N[lang]
-
-  return page === 'catalog'
-    ? <CatalogPage t={t} lang={lang} setLang={setLang} currency={currency} setCurrency={setCurrency} onNav={setPage} />
-    : <AboutPage t={t} lang={lang} setLang={setLang} onNav={setPage} />
+  if (loading) {
+    return (
+      <div style={{ minHeight: '100vh', display: 'grid', placeItems: 'center', color: 'var(--brand)', fontFamily: 'var(--mono)', fontSize: 12 }}>
+        загрузка…
+      </div>
+    )
+  }
+  return isAuthenticated ? <Editor /> : <SignIn />
 }
