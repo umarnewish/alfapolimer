@@ -8,10 +8,10 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
-from .auth import seed_owners
+from .auth import seed_owner_password, seed_owners
 from .database import Base, SessionLocal, engine
 from .models import Supplier
-from .routers import auth_routes, catalogs, categories, import_routes, products, suppliers, team
+from .routers import auth_routes, catalogs, categories, import_routes, products, suppliers, team, telegram_webhook
 
 Base.metadata.create_all(bind=engine)
 
@@ -37,6 +37,7 @@ def seed():
             db.bulk_save_objects([Supplier(name=name, tag_hint=tag) for name, tag in DEFAULT_SUPPLIERS])
             db.commit()
         seed_owners(db)
+        seed_owner_password(db)
     finally:
         db.close()
 
@@ -66,6 +67,7 @@ app.include_router(suppliers.router)
 app.include_router(import_routes.router)
 app.include_router(catalogs.router)
 app.include_router(team.router)
+app.include_router(telegram_webhook.router)
 
 
 @app.get("/api/health")

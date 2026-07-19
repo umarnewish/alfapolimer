@@ -14,14 +14,8 @@ export function AuthProvider({ children }) {
       .finally(() => setLoading(false))
   }, [])
 
-  const login = useCallback(async (telegramUser) => {
-    const inviteToken = new URLSearchParams(window.location.search).get('invite')
-    const { user } = await api.loginTelegram(inviteToken ? { ...telegramUser, invite_token: inviteToken } : telegramUser)
-    if (inviteToken) {
-      const url = new URL(window.location.href)
-      url.searchParams.delete('invite')
-      window.history.replaceState({}, '', url)
-    }
+  const login = useCallback(async (username, password) => {
+    const { user } = await api.login(username, password)
     setUser(user)
     return user
   }, [])

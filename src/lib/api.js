@@ -22,7 +22,7 @@ async function request(path, options = {}) {
 }
 
 export const api = {
-  loginTelegram: (telegramUser) => request('/auth/telegram', { method: 'POST', body: JSON.stringify(telegramUser) }),
+  login: (username, password) => request('/auth/login', { method: 'POST', body: JSON.stringify({ username, password }) }),
   me: () => request('/auth/me'),
   logout: () => request('/auth/logout', { method: 'POST' }),
 }

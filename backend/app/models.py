@@ -35,8 +35,9 @@ class User(Base):
     __tablename__ = "users"
     id = Column(Integer, primary_key=True)
     telegram_id = Column(String, unique=True, nullable=False)
-    username = Column(String, nullable=True)
+    username = Column(String, unique=True, nullable=True)
     first_name = Column(String, nullable=True)
+    password_hash = Column(String, nullable=True)
     role = Column(String, default="employee", nullable=False)  # owner | employee
     created_at = Column(DateTime, server_default=func.now())
 
@@ -48,6 +49,22 @@ class Invite(Base):
     created_by = Column(String, nullable=True)
     used_by = Column(String, nullable=True)
     created_at = Column(DateTime, server_default=func.now())
+    used_at = Column(DateTime, nullable=True)
+
+
+class LoginCode(Base):
+    """One-time code issued by the Telegram bot, redeemed on the web login form."""
+    __tablename__ = "login_codes"
+    id = Column(Integer, primary_key=True)
+    code = Column(String, unique=True, nullable=False, index=True)
+    telegram_id = Column(String, nullable=False)
+    username = Column(String, nullable=True)
+    first_name = Column(String, nullable=True)
+    photo_url = Column(String, nullable=True)
+    chat_id = Column(String, nullable=False)
+    message_id = Column(Integer, nullable=True)
+    created_at = Column(DateTime, server_default=func.now())
+    expires_at = Column(DateTime, nullable=False)
     used_at = Column(DateTime, nullable=True)
 
 
